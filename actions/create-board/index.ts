@@ -1,7 +1,7 @@
 "use server";
 
 import { auth } from "@clerk/nextjs";
-import { InputType } from "./type";
+import { InputType, ReturnType } from "./type";
 import { db } from "@/lib/db";
 import { revalidatePath } from "next/cache";
 import { CreateBoard } from "./schema";

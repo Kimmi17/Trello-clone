@@ -17,13 +17,17 @@ interface HeaderProps {
 }
 
 export const Header = ({ data }: HeaderProps) => {
-  const queryClient = useQueryClient();
   const params = useParams();
+  const queryClient = useQueryClient();
 
   const { execute } = useAction(updateCard, {
     onSuccess: (data) => {
       queryClient.invalidateQueries({
         queryKey: ["card", data.id],
+      });
+
+      queryClient.invalidateQueries({
+        queryKey: ["card-logs", data.id],
       });
 
       toast.success(`Renamed to "${data.title}"`);
@@ -58,7 +62,7 @@ export const Header = ({ data }: HeaderProps) => {
   };
 
   return (
-    <div className="flex tiems-start gap-x-3 mb-6 w-full">
+    <div className="flex items-start gap-x-3 mb-6 w-full">
       <Layout className="h-5 w-5 mt-1 text-neutral-700" />
       <div className="w-full">
         <form action={onSubmit}>
